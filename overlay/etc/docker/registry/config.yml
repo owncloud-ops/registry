@@ -1,0 +1,30 @@
+version: 0.1
+log:
+  level: info
+  fields:
+    service: registry
+    environment: prod
+
+storage:
+  cache:
+    blobdescriptor: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+  maintenance:
+    uploadpurging:
+      enabled: false
+    readonly:
+      enabled: false
+  delete:
+    enabled: true
+
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
