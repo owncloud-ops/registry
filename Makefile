@@ -13,7 +13,7 @@ SRC := src/github.com/docker/distribution
 all: clean build
 
 .PHONY: build
-build: build-src build-bin
+build: build-src build-bin build-final
 
 .PHONY: build-src
 build-src:
@@ -24,7 +24,11 @@ build-src:
 .PHONY: build-bin
 build-bin:
 	cd $(SRC) && \
-	GOPATH=$(ROOTDIR) CGO_ENABLED=0 make PREFIX=/go clean binaries
+	GO111MODULE=off GOPATH=$(ROOTDIR) CGO_ENABLED=0 make PREFIX=/go clean binaries
+
+.PHONY: build-final
+build-final:
+	mv $(SRC)/bin src/
 
 .PHONY: clean
 clean:
