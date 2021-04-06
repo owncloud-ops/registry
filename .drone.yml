@@ -10,7 +10,7 @@ steps:
 - name: build
   image: golang:1.16
   commands:
-  - make build
+  - SRC=github.com/docker/distribution make build
 
 - name: executable
   image: alpine
