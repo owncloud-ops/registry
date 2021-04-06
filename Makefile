@@ -25,7 +25,7 @@ build-src:
 build-bin:
 	cd $(SRC) && \
 	go env && \
-	GOPATH=$(ROOTDIR)build CGO_ENABLED=0 make PREFIX=/go clean binaries
+	GO111MODULE=on GOPATH=$(ROOTDIR)build CGO_ENABLED=0 make PREFIX=/go clean binaries
 
 .PHONY: clean
 clean:
