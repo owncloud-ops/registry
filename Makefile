@@ -24,7 +24,7 @@ build-src:
 .PHONY: build-bin
 build-bin:
 	cd $(SRC) && \
-	GOPATH=$(ROOTDIR) CGO_ENABLED=0 make PREFIX=/go clean binaries
+	CGO_ENABLED=0 make PREFIX=/go clean binaries
 
 .PHONY: clean
 clean:
