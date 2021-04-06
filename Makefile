@@ -7,7 +7,7 @@ export GOARCH ?= amd64
 ROOTDIR=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 REGISTRY_REPO := https://github.com/distribution/distribution.git
 REGISTRY_BRANCH := main
-SRC := src/github.com/docker/distribution
+SRC := build/src/github.com/docker/distribution
 
 .PHONY: all
 all: clean build
@@ -24,7 +24,8 @@ build-src:
 .PHONY: build-bin
 build-bin:
 	cd $(SRC) && \
-	CGO_ENABLED=0 make PREFIX=/go clean binaries
+	go env && \
+	GOPATH=$(ROOTDIR)build CGO_ENABLED=0 make PREFIX=/go clean binaries
 
 .PHONY: clean
 clean:
