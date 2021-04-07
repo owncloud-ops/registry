@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+set -eo pipefail
+
+source /usr/local/lib/log.sh
+
+log_info "Start Docker Registry\n"
+exec /bin/registry serve /etc/docker/registry/config.yml
