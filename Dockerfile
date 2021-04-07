@@ -23,7 +23,7 @@ EXPOSE 5000
 
 USER app
 
-ENTRYPOINT ["/bin/registry"]
+ENTRYPOINT ["/usr/bin/entrypoint"]
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD /usr/bin/healthcheck
-WORKDIR /home/app
-CMD ["serve", "/etc/docker/registry/config.yml"]
+WORKDIR /var/lib/registry
+CMD []
