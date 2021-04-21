@@ -1,6 +1,6 @@
 ---
 repository:
-  name: "registry"
+  name: registry
   description: Docker image for Registry
   homepage: https://hub.docker.com/r/owncloudops/registry
   topics: docker, registry
@@ -51,7 +51,7 @@ branches:
     protection:
       required_pull_request_reviews: null
       required_status_checks:
-        strict: true
+        strict: false
         contexts:
           - continuous-integration/drone/pr
       enforce_admins: null
