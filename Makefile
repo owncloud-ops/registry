@@ -1,11 +1,12 @@
-export BUILD_VERSION ?= release/2.7
+# renovate: datasource=github-tags depName=distribution/distribution
+export BUILD_VERSION ?= v2.7.1
 
 export BUILDTAGS ?= include_oss include_gcs
 export GOOS ?= linux
 export GOARCH ?= amd64
 
 ROOTDIR=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-REGISTRY_REPO := https://github.com/distribution/distribution.git
+REGISTRY_REPO := https://github.com/distribution/distribution
 REGISTRY_BRANCH := main
 SRC := src
 BUILD := $(SRC)/github.com/docker/distribution
@@ -29,7 +30,7 @@ build-bin:
 
 .PHONY: build-final
 build-final:
-	mv $(BUILD)/bin $(SRC)/
+	mv $(BUILD)/bin $(SRC)
 
 .PHONY: clean
 clean:
