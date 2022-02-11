@@ -3,7 +3,7 @@
 [![Build Status](https://drone.owncloud.com/api/badges/owncloud-ops/registry/status.svg)](https://drone.owncloud.com/owncloud-ops/registry/)
 [![Docker Hub](https://img.shields.io/badge/docker-latest-blue.svg?logo=docker&logoColor=white)](https://hub.docker.com/r/owncloudops/registry)
 
-Custom docker image for Docker distribution [registry](https://github.com/distribution/distribution).
+Custom container image for the [Container Registry](https://github.com/distribution/distribution).
 
 ## Ports
 

@@ -1,9 +1,9 @@
 ---
 repository:
   name: registry
-  description: Docker image for Registry
+  description: Custom container image for the Container Registry
   homepage: https://hub.docker.com/r/owncloudops/registry
-  topics: docker, registry
+  topics: oci, container, registry
 
   private: false
   has_issues: true
