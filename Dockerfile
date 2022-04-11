@@ -7,6 +7,11 @@ LABEL org.opencontainers.image.url="https://github.com/owncloud-ops/registry"
 LABEL org.opencontainers.image.source="https://github.com/owncloud-ops/registry"
 LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ops/registry"
 
+ARG CONTAINER_LIBRARY_VERSION
+
+# renovate: datasource=github-releases depName=owncloud-op/container-library
+ENV CONTAINER_LIBRARY_VERSION="${CONTAINER_LIBRARY_VERSION:-v0.1.0}"
+
 ADD overlay/ /
 ADD src/bin/registry /bin/registry
 
@@ -14,6 +19,7 @@ RUN addgroup -g 1001 -S app && \
     adduser -S -D -H -u 1001 -h /home/app -s /bin/sh -G app -g app app
 
 RUN apk add --no-cache ca-certificates && \
+    curl -SsL "https://github.com/owncloud-ops/container-library/releases/download/${CONTAINER_LIBRARY_VERSION}/container-library.tar.gz" | tar xz -C / && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
