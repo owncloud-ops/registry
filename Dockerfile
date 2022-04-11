@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ops/re
 
 ARG CONTAINER_LIBRARY_VERSION
 
-# renovate: datasource=github-releases depName=owncloud-op/container-library
+# renovate: datasource=github-releases depName=owncloud-ops/container-library
 ENV CONTAINER_LIBRARY_VERSION="${CONTAINER_LIBRARY_VERSION:-v0.1.0}"
 
 ADD overlay/ /
