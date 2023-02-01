@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: build
-  image: golang:1.16
+  image: golang:1.20
   environment:
     SRC: github.com/docker/distribution
   commands:
