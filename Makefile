@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags depName=distribution/distribution
-export BUILD_VERSION ?= v2.8.1
+export BUILD_VERSION ?= v2.8.2
 
 export BUILDTAGS ?= include_oss include_gcs
 export GOOS ?= linux
