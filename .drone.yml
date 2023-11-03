@@ -1,5 +1,6 @@
 ---
 kind: pipeline
+type: docker
 name: container
 
 platform:
@@ -32,17 +33,26 @@ steps:
     depends_on:
       - executable
 
-  - name: dryrun
-    image: docker.io/plugins/docker
+  - name: security-build
+    image: docker.io/owncloudci/drone-docker-buildx:1
     settings:
       dockerfile: Dockerfile
-      dry_run: true
+      output: type=oci,dest=oci/${DRONE_REPO_NAME},tar=false
       repo: owncloudops/${DRONE_REPO_NAME}
-    when:
-      ref:
-        - refs/pull/**
+
+  - name: security-scan
+    image: ghcr.io/aquasecurity/trivy
+    commands:
+      - trivy -v
+      - trivy image --input oci/${DRONE_REPO_NAME}
+    environment:
+      TRIVY_EXIT_CODE: 1
+      TRIVY_IGNORE_UNFIXED: True
+      TRIVY_NO_PROGRESS: True
+      TRIVY_SEVERITY: HIGH,CRITICAL
+      TRIVY_TIMEOUT: 1m
     depends_on:
-      - tags
+      - security-build
 
   - name: changelog
     image: quay.io/thegeeklab/git-chglog
@@ -51,10 +61,10 @@ steps:
       - git-chglog --no-color --no-emoji ${DRONE_TAG:---next-tag unreleased unreleased}
       - git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased unreleased}
     depends_on:
-      - dryrun
+      - security-scan
 
   - name: publish-dockerhub
-    image: docker.io/plugins/docker
+    image: docker.io/owncloudci/drone-docker-buildx:1
     settings:
       dockerfile: Dockerfile
       password:
@@ -70,7 +80,7 @@ steps:
       - changelog
 
   - name: publish-quay
-    image: docker.io/plugins/docker
+    image: docker.io/owncloudci/drone-docker-buildx:1
     settings:
       dockerfile: Dockerfile
       password:
@@ -109,6 +119,7 @@ trigger:
 
 ---
 kind: pipeline
+type: docker
 name: notifications
 
 platform:
