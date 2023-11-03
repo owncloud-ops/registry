@@ -23,22 +23,14 @@ steps:
     depends_on:
       - build
 
-  - name: tags
-    image: quay.io/thegeeklab/docker-autotag
-    environment:
-      DOCKER_AUTOTAG_FORCE_LATEST: True
-      DOCKER_AUTOTAG_IGNORE_PRERELEASE: True
-      DOCKER_AUTOTAG_OUTPUT_FILE: .tags
-      DOCKER_AUTOTAG_VERSION: ${DRONE_TAG}
-    depends_on:
-      - executable
-
   - name: security-build
     image: docker.io/owncloudci/drone-docker-buildx:1
     settings:
       dockerfile: Dockerfile
       output: type=oci,dest=oci/${DRONE_REPO_NAME},tar=false
       repo: owncloudops/${DRONE_REPO_NAME}
+    depends_on:
+      - executable
 
   - name: security-scan
     image: ghcr.io/aquasecurity/trivy
