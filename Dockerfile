@@ -19,7 +19,7 @@ RUN addgroup -g 1001 -S app && \
     adduser -S -D -H -u 1001 -h /home/app -s /bin/sh -G app -g app app
 
 RUN apk --update add --virtual .build-deps curl tar && \
-    apk add --no-cache ca-certificates && \
+    apk --update add --no-cache ca-certificates libcrypto3 libssl3 && \
     curl -SsfL "https://github.com/owncloud-ops/container-library/releases/download/${CONTAINER_LIBRARY_VERSION}/container-library.tar.gz" | tar xz -C / && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/* && \
