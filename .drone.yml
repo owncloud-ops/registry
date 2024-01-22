@@ -24,7 +24,7 @@ steps:
       - build
 
   - name: security-build
-    image: docker.io/owncloudci/drone-docker-buildx:2
+    image: docker.io/owncloudci/drone-docker-buildx:3
     settings:
       dockerfile: Dockerfile
       output: type=oci,dest=oci/${DRONE_REPO_NAME},tar=false
@@ -57,7 +57,7 @@ steps:
       - security-scan
 
   - name: publish-dockerhub
-    image: docker.io/owncloudci/drone-docker-buildx:2
+    image: docker.io/owncloudci/drone-docker-buildx:3
     settings:
       dockerfile: Dockerfile
       auto_tag: True
@@ -74,7 +74,7 @@ steps:
       - changelog
 
   - name: publish-quay
-    image: docker.io/owncloudci/drone-docker-buildx:2
+    image: docker.io/owncloudci/drone-docker-buildx:3
     settings:
       dockerfile: Dockerfile
       auto_tag: True
