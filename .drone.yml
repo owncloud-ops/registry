@@ -9,7 +9,7 @@ platform:
 
 steps:
   - name: build
-    image: golang:1.20
+    image: golang:1.22
     commands:
       - make build
     environment:
